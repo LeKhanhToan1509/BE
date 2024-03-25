@@ -70,11 +70,11 @@ module.exports.createProduct = async (req, res) => {
     let title = req.body.title;
     let description = req.body.description;
     let discount = req.body.discount;
-    let thumb = `/uploads/${req.file.filename}`;
+    let thumb = req.body.image;
     let price = req.body.price;
     let status = req.body.status;
     function isValidString(input) {
-        return /^[a-zA-Z\s]+$/.test(input);
+        return true;
     }
     function validateTitleAndDescription(title, description) {
         return isValidString(title) && isValidString(description);
@@ -83,6 +83,7 @@ module.exports.createProduct = async (req, res) => {
         res.redirect("back");
         return;
     }
+    console.log(thumb);
     const product = new Product({
         title: title,
         description: description,
