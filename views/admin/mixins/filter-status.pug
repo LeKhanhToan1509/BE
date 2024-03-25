@@ -1,0 +1,8 @@
+
+mixin filter-status(filterStatus, name)
+    .btn-group
+        button.btn.btn-secondary.dropdown-toggle(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+            | #{name}
+        .dropdown-menu
+            each item in filterStatus
+                button.dropdown-item(class=item.class, button-status=item.status) #{item.name}

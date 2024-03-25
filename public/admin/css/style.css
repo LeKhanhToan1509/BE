@@ -1,0 +1,152 @@
+html {
+    user-select: none;
+    text-decoration: none;
+}
+.header {
+    background: #202020;
+    padding: 10px, 0;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.header .inner-logo a {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.body .sider {
+    width: 150px;
+    background: #323232;
+    color: #fff;
+    height: calc(100vh - 56px);
+    position: fixed;
+    left: 0;
+    height: 100vh;
+}
+
+.body .main {
+    padding: 15px;
+    position: relative;
+    margin-left: 150px;
+    width: calc(100vw - 165px);
+    box-sizing: border-box;
+    height: calc(100vh - 56px);
+    overflow: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    align-items: center;
+}
+
+.product-image {
+    width: 50px;
+    height: auto;
+}
+.text {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid;
+    border-radius: 8px;
+    color: black;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.product-image {
+    width: 100px;
+    height: 50px;
+}
+.delete {
+    color: #222121;
+    cursor: pointer;
+    background-color: #c97055;
+}
+.edit {
+    color: #222121;
+    cursor: pointer;
+    background-color: #f9e4b2;
+}
+
+.status-active {
+    color: green;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.status-inactive {
+    padding: 5px;
+    border: 1px solid;
+    color: red;
+    border-radius: 8px;
+}
+.sider {
+    width: 200px; /* Adjust as needed */
+    background-color: #f5f5f5; /* Adjust as needed */
+}
+
+.inner-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.inner-menu ul li {
+    padding: 10px;
+    border-bottom: 1px solid #111213;
+}
+
+.inner-menu ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    padding: 10px; /* Make sure padding is the same as in .inner-menu ul li */
+    transition: all 0.1s ease; /* Add smooth transition */
+}
+.btn-group {
+    margin-bottom: 20px;
+}
+.dropdown-item:hover {
+    cursor: pointer;
+}
+.number .active {
+    background-color: #074b88;
+    color: white;
+    border-color: #28a745;
+}
+
+.textForm {
+    margin-top: 20px;
+}
+
+#createButton {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 32px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 50px;
+    float: right;
+}

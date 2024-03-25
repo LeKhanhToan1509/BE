@@ -1,0 +1,72 @@
+extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+
+block main
+    h2 Bộ lọc và tìm kiếm
+    form.search-filter(action='products', id="formSearch")
+        .input-group.mb-3
+            input.form-control(name='name', type='text', placeholder="Tìm kiếm", aria-label="Recipient's username", aria-describedby='basic-addon2')
+            .input-group-append
+                button.btn.btn-outline-secondary(type='submit') Search
+    +filter-status(filterStatus, name)
+
+    form(action=`${prefixAdmin}/products/change-multi?_method=PATCH`, method="POST", id="formChangeMulti")
+        input#form-control.d-none(name='input', value="")
+        input#form-status.d-none(name='status', value="")
+        div(style="display: flex; justify-content: center; margin-bottom: 20px;")
+            button.btn.btn-primary#buttonActive(style="margin-right: 20px", type="submit") Active
+            button.btn.btn-danger#buttonInactive(type="submit") Inactive
+
+    a.btn.btn-primary.btn-success(href=`${prefixAdmin}/products/create`) + Create
+
+    table.table
+        thead
+            tr
+                th 
+                    input#chooseAll(type='checkbox', name='checkAll', value='all')
+                th STT
+                th Hình ảnh
+                th Tiêu đề
+                th Giá
+                th Trạng thái
+                th Hành động
+        tbody
+            each product, index in products
+                if product.delete == false
+                    tr
+                        td 
+                            input.choose(type='checkbox', name='checkItem', value=product.id)
+                        td= index + 1
+                        td
+                            img.product-image(src=product.thumbnail, alt=product.title)
+                        td= product.title
+                        td= product.price
+                        td
+                            if product.status == 1
+                                a.status-active(href='javascript:;', data-id=product.id, data-status=product.status, button-change-status) Hoạt động
+                            else
+                                a.status-inactive(href='javascript:;', data-id=product.id, data-status=product.status, button-change-status) Không hoạt động
+                        td
+                            a.text.edit(href="javascript:;", data-id=product.id) Sửa
+                            a.text.delete(href="javascript:;", data-id=product.id) Xóa
+
+    form(action=``, method="POST", path=`${prefixAdmin}/products/delete-product/`, id="deleteForm") 
+
+    - var disabledClass = page == 1 ? 'disabled' : '' 
+    - var lastClass = page >= PageLimit ? 'disabled' : '' 
+    - var range = [...Array(PageLimit).keys()]
+
+    if PageLimit > 1
+        nav
+            ul.pagination.justify-content-center
+                li.page-item(class=disabledClass)
+                    button.page-link.special &lt;
+                each item, index in range
+                    - var num = index + 1
+                    li.page-item.number
+                        button.page-link.numberpage(numberpage=num) #{num}
+                li.page-item(class=lastClass)
+                    button.page-link.special &gt;
+
+    form(action="", method="POST", id='form-change-status', data-path=`${prefixAdmin}/products/change-status`)
+    script(src="/admin/js/product.js")
