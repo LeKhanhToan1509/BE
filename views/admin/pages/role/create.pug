@@ -1,0 +1,21 @@
+extends ../../layouts/default.pug
+
+block main 
+    form.d-nones(method='POST' id = "createForm" action=`${prefixAdmin}/roles/create`)
+        .textForm
+            label(for='name') Title
+            input.form-control(type='text' name = "title" placeholder='Title...')
+        .input-group.textForm
+            .input-group-prepend
+            label.input-group-text Description
+            textarea.form-control(name = "description")
+        .textForm
+            label(for='status') Role
+            select.form-control(name='role')
+                option(value='admin') Admin
+                option(value='client') Client
+
+        button#createButton(type='submit') Create
+
+    script(src="/admin/js/roleCreate.js") 
+    

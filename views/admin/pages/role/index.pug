@@ -1,0 +1,30 @@
+extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+
+block main
+    script(src="/admin/js/roleCreate.js")
+
+    a.btn.btn-primary.large(href=`${prefixAdmin}/roles/create` style = "margin : 25px") Create
+
+    table.table
+        thead
+            tr
+                th STT
+                th Title
+                th Description
+                th Permission
+                th Action
+        tbody
+            each role, index in roles
+                tr
+                    td= index + 1
+                    td= role.title
+                    td= role.description
+                    td= role.permissions
+                    td
+                        button.text.edit(href="javascript:;", data-id=role.id) Sửa
+                        button.text.delete(href="javascript:;", data-id=role.id) Xóa
+    form(action = `${prefixAdmin}/roles`, method = "POST" id = "formEdit" style = "display: none;")
+    
+    script(src="/admin/js/roleCreate.js") 
+    script(src="/admin/js/roleEdit.js")

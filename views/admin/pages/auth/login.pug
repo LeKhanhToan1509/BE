@@ -1,0 +1,20 @@
+extends ../../layouts/auth.pug
+
+block main 
+    .container(style='display: flex; justify-content: center; align-items: center; height: 100vh;')
+        form(style='width: 300px;' method = "POST" action = `${prefixAdmin}/auth/login`)
+            .form-group
+                label(for='email') Email address
+                input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter email' name = "email")
+                small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+            .form-group
+                label(for='exampleInputPassword1' ) Password
+                input#exampleInputPassword1.form-control(type='password' placeholder='Password' name = "password")
+            .form-check
+                input#exampleCheck1.form-check-input(type='checkbox')
+                label.form-check-label(for='exampleCheck1') Check me out
+            .form-group 
+            button.btn.btn-primary(type='submit') Submit
+            a(href='#' style='display: block; text-align: center; margin-top: 10px;') Quên mật khẩu
+            a(href=`${prefixAdmin}/auth/signup` style='display: block; text-align: center; margin-top: 10px;') Đăng kí
+    script(src="/admin/js/login.js") 

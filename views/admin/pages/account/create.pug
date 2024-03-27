@@ -1,0 +1,41 @@
+extends ../../layouts/default.pug
+
+block main 
+    form(method='POST' enctype="multipart/form-data" id = "createForm" action=`${prefixAdmin}/account/create`)
+        .textForm 
+            label(for="name") Name 
+            input.form-control(type='text' name = "name" placeholder='Name')
+        .textForm
+            label(for='inputEmail4') Email
+            input#inputEmail4.form-control(type='email' placeholder='Email' name = "email")
+        .textForm
+            label(for='inputPassword4') Password
+            input#inputPassword4.form-control(type='password' placeholder='Password' name = "password")
+        .textForm
+            label(for='inputAddress') Address
+            input#inputAddress.form-control(type='text' placeholder='Address' name = "address")
+        .textForm 
+            label(for='telephoneNumber') Phone Number
+            input(type="text" class="form-control" placeholder="Phone Number" name = "phone_number")
+        .textForm 
+            .custom-file
+                input#validatedCustomFile.custom-file-input(type='file' required='' name='img', accept='image/*')
+                label.custom-file-label(for='validatedCustomFile') Choose file...
+                .invalid-feedback Example invalid custom file feedback
+        .textForm
+            lable Permission
+            select.custom-select(name = "role_id")
+                option(selected='') Choose...
+                each item in items 
+                    option(value=item.id) #{item.title}
+        .textForm
+            lable Status
+            select.custom-select(name = "status")
+                option(selected='') Choose...
+                option(value=1) Hoạt Động
+                option(value=0) Không Hoạt Động
+
+        button#createButton(type='submit') Create
+
+    script(src="/admin/js/createAccount.js") 
+    

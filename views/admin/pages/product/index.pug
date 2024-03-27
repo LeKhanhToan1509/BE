@@ -17,6 +17,15 @@ block main
             button.btn.btn-primary#buttonActive(style="margin-right: 20px", type="submit") Active
             button.btn.btn-danger#buttonInactive(type="submit") Inactive
 
+
+    div(style="display: flex; justify-content: center; margin-bottom: 20px;", sort)
+        select#sort(name='sort', sort-select)
+            option(value='title_asc') A to Z
+            option(value='title_desc') Z to A
+            option(value='price_asc') Price ascending
+            option(value='price_desc') Price descending
+        button.btn.btn-danger(sort-clear, style="margin-left: 20px;") Clear
+
     a.btn.btn-primary.btn-success(href=`${prefixAdmin}/products/create`) + Create
 
     table.table

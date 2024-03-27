@@ -8,7 +8,7 @@ block main
         .input-group.textForm
             .input-group-prepend
             label.input-group-text Description
-            textarea.form-control(aria-label='With textarea' name = "description")
+            textarea.form-control(name = "description")
         .textForm
             label(for='price') Price
             input(class="form-control" type="text" placeholder="Price..." name = "price")
@@ -29,6 +29,6 @@ block main
                 option(value=0) Không Hoạt Động
 
         button#createButton(type='submit') Create
-    
-    
+
     script(src="/admin/js/create.js") 
+    

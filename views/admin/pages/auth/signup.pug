@@ -1,0 +1,22 @@
+extends ../../layouts/auth.pug
+
+block main 
+    .container(style='display: flex; justify-content: center; align-items: center; height: 100vh;')
+        form(method='POST' id = "signupForm" action=`${prefixAdmin}/auth/signup` style='width: 300px;')
+            .textForm 
+                label(for="name") Name 
+                input.form-control(type='text' name = "name" placeholder='Name' required)
+            .textForm
+                label(for='inputEmail4') Email
+                input#inputEmail4.form-control(type='email' placeholder='Email' name = "email" required)
+            .textForm
+                label(for='inputPassword4') Password
+                input#inputPassword4.form-control(type='password' placeholder='Password' name = "password" required)
+            .textForm
+                label(for='inputAddress') Address
+                input#inputAddress.form-control(type='text' placeholder='Address' name = "address" required)
+            .textForm 
+                label(for='telephoneNumber') Phone Number
+                input(type="text" class="form-control" placeholder="Phone Number" name = "phone_number" required)
+            .text-center
+                button#editButton.btn.btn-success(type='submit' style='margin-top: 30px; padding: 10px 20px; font-size: 20px') Create

@@ -7,25 +7,29 @@ module.exports.product = async (req, res) => {
     try {
         const help = filterStatusHelper(req.query);
         const page = Page(req.query);
+        let sort = {};
+        if (req.query.keyword && req.query.keyvalue) {
+            sort[req.query.keyword] = req.query.keyvalue;
+        }
         let findByStatus = {};
         if (req.query.status) {
             findByStatus.status = req.query.status;
         }
         let products = await Product.find({
             $and: [{ delete: false }, findByStatus],
-        });
+        }).sort(sort);
 
         if (req.query.title) {
             products = products.filter((product) =>
                 algorithms.fuzzySearch(req.query.title, product.title)
             );
         }
+
         const cnt = products.length;
         products = products.slice(
             (page.page - 1) * page.limit,
             page.page * page.limit
         );
-
         res.render("admin/pages/product/index.pug", {
             products: products,
             filterStatus: help.filterStatus,
@@ -73,16 +77,7 @@ module.exports.createProduct = async (req, res) => {
     let thumb = req.body.image;
     let price = req.body.price;
     let status = req.body.status;
-    function isValidString(input) {
-        return true;
-    }
-    function validateTitleAndDescription(title, description) {
-        return isValidString(title) && isValidString(description);
-    }
-    if (!validateTitleAndDescription(title, description)) {
-        res.redirect("back");
-        return;
-    }
+    console.log(req.body);
     console.log(thumb);
     const product = new Product({
         title: title,

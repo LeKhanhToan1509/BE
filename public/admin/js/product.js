@@ -94,3 +94,34 @@ if (deleteButton.length) {
         });
     });
 }
+
+const sort = document.querySelector("[sort]");
+
+if (sort) {
+    const sortSelect = sort.querySelector("[sort-select]");
+    const sortClear = sort.querySelector("[sort-clear]");
+    sortSelect.addEventListener("change", (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        const [sort, order] = e.target.value.split("_");
+        let url = new URL(location.href);
+        if (sort && order) {
+            url.searchParams.set("keyword", sort);
+            url.searchParams.set("keyvalue", order);
+        } else {
+            url.searchParams.delete("keyword");
+        }
+        location.href = url;
+    });
+}
+url = new URL(location.href);
+const keyvalue = url.searchParams.get("keyvalue");
+const keyword = url.searchParams.get("keyword");
+const sortSelect = sort.querySelector("[sort-select]");
+if (keyvalue && keyword) {
+    option = `${keyword}_${keyvalue}`;
+    const optionSelected = sortSelect.querySelector(
+        `option[value="${option}"]`
+    );
+    optionSelected.selected = true;
+}
