@@ -13,7 +13,6 @@ module.exports.requireAuth = async (req, res, next) => {
                 .select("-password");
             if (!user) {
                 res.redirect(`${systemConfig.prefixAdmin}/auth/login`);
-                return;
             } else {
                 const roles = await role.findOne({ _id: user.role_id });
                 if (roles) {
