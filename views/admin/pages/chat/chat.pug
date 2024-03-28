@@ -10,8 +10,13 @@ block main
                             .avatar
                                 img(src= item.inforUser.image, alt="Avatar")
                         .content #{item.content}
+                .typing
             .chat-input
                 form(id = "send-message" method = "POST")
-                    input(type="text" placeholder="Type a message..." name = "message" autocomplete="off")
+                    input.value(type="text" placeholder="Type a message..." name = "message" autocomplete="off")
+                    button.btn.btn-secondary.dropdown-toggle(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                        i.fa-solid.fa-face-smile
+                    .dropdown-menu
+                        emoji-picker(emoji-version="15.0").light
                     button(type="submit") 
                         i.fa-solid.fa-paper-plane
