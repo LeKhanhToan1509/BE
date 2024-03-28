@@ -3,8 +3,15 @@ const path = require("path");
 const express = require("express");
 const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const app = express();
+
+//socketIO
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+global._io = io;
 
 // Middleware for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,6 +47,6 @@ app.use(express.static(`${__dirname}/public`));
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // Starting the server
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });

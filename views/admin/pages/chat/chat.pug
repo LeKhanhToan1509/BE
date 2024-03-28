@@ -1,0 +1,17 @@
+extends ../../layouts/default.pug
+
+block main
+    .container
+        .chat-window
+            .messages(my-id=user.id)
+                each item in chat 
+                    .message(class = (item.inforUser.id == user.id ? "outgoing" : "incoming"))
+                        if item.inforUser.id != user.id
+                            .avatar
+                                img(src= item.inforUser.image, alt="Avatar")
+                        .content #{item.content}
+            .chat-input
+                form(id = "send-message" method = "POST")
+                    input(type="text" placeholder="Type a message..." name = "message" autocomplete="off")
+                    button(type="submit") 
+                        i.fa-solid.fa-paper-plane

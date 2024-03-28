@@ -1,174 +1,176 @@
 extends ../../layouts/default.pug
 
+
 block main
-    if(item.length > 0)
-        style.
-            body {
-                font-family: Arial, sans-serif;
-            }
-            td {
-                padding: 10px;
-                border-bottom: 1px solid #ddd;
-            }
-            .content {
-                font-weight: bold;
-            }
-            table {
-                border-collapse: collapse;
-                width: 70%;
-            }
-            input {
-                cursor: pointer;
-            }
-            .btn.btn-success {
-                margin: 25px;
-            }
-        body
-            form(action='', path = `${prefixAdmin/roles/permission}`, method='POST' id = "permission-form")
-                input.d-none(value = [] name = "post" id = "post-input")
-                table
-                    thead
-                        tr
-                        th Tính năng
-                        each i in item
-                            th #{i.title}
-                    tbody
-                        tr
-                            td.content Danh mục sản phẩm
-                            each i in item 
-                                td 
-                                    input.d-none(value = i._id, name='role_id'  postID)
+    if role.permissions.includes("roles_permission")
+        if(item.length > 0)
+            style.
+                body {
+                    font-family: Arial, sans-serif;
+                }
+                td {
+                    padding: 10px;
+                    border-bottom: 1px solid #ddd;
+                }
+                .content {
+                    font-weight: bold;
+                }
+                table {
+                    border-collapse: collapse;
+                    width: 70%;
+                }
+                input {
+                    cursor: pointer;
+                }
+                .btn.btn-success {
+                    margin: 25px;
+                }
+            body
+                form(action='', path = `${prefixAdmin/roles/permission}`, method='POST' id = "permission-form")
+                    input.d-none(value = [] name = "post" id = "post-input")
+                    table
+                        thead
+                            tr
+                            th Tính năng
+                            each i in item
+                                th #{i.title}
+                        tbody
+                            tr
+                                td.content Danh mục sản phẩm
+                                each i in item 
+                                    td 
+                                        input.d-none(value = i._id, name='role_id'  postID)
 
-                        tr(data-name = "products-category_view")
-                            td Xem
-                            each i in item
-                                td 
-                                    if i.permissions.includes('products-category_view')
-                                        input(type='checkbox' ID=i._id name = "products-category_view" checked)
-                                    else
-                                        input(type='checkbox' ID=i._id name = "products-category_view" )
-                        tr(data-name = "products-category_create")
-                            td Thêm mới
-                            each i in item 
-                                td 
-                                    if i.permissions.includes('products-category_create')
-                                        input(type="checkbox" ID=i._id name = "products-category_create" checked)
-                                    else 
-                                        input(type="checkbox" ID=i._id name = "products-category_create")
-                        tr(data-name = "products-category_edit")
-                            td Chỉnh sửa
-                            each i in item
-                                td 
-                                    if i.permissions.includes('products-category_edit')
-                                        input(type='checkbox' ID=i._id name = "products-category_edit" checked)
-                                    else
-                                        input(type='checkbox' ID=i._id name = "products-category_edit")
-                        tr(data-name = "products-category_delete")
-                            td Xóa
-                            each i in item
-                                td 
-                                    if i.permissions.includes('products-category_delete')
-                                        input(type='checkbox' ID=i._id name = "products-category_delete" checked)
-                                    else
-                                        input(type='checkbox' ID=i._id name = "products-category_delete")
-                        tr
-                            td.content Sản phẩm
-                            each i in item 
-                                td 
-                                    input.d-none(value = i._id, name='role_id'  postID)
-                        tr(data-name = "products_view")
-                            td Xem
-                            each i in item 
-                                td 
-                                    if i.permissions.includes('products_view')
-                                        input(type="checkbox" ID=i._id name = "products_view" checked)
-                                    else 
-                                        input(type="checkbox" ID=i._id name = "products_view")           
-                        tr(data-name = "products_create")
-                            td Thêm mới
-                            each i in item 
-                                td 
-                                    if i.permissions.includes('products_create')
-                                        input(type="checkbox" ID=i._id name = "products_create" checked)
-                                    else 
-                                        input(type="checkbox" ID=i._id name = "products_create")
-                        tr(data-name = "products_edit")
-                            td Chỉnh sửa
-                            each i in item
-                                td 
-                                    if i.permissions.includes('products_edit')
-                                        input(type='checkbox' ID=i._id name = "products_edit" checked)
-                                    else
-                                        input(type='checkbox' ID=i._id name = "products_edit")
-                        tr(data-name = "products_delete")
-                            td Xóa
-                            each i in item
-                                td 
-                                    if i.permissions.includes('products_delete')
-                                        input(type='checkbox' ID=i._id name = "products_delete" checked)
-                                    else
-                                        input(type='checkbox' ID=i._id name = "products_delete")
-                        tr
-                            td.content Quyền
-                            each i in item 
-                                td 
-                                    input.d-none(value = i._id, name='role_id'  postID)
-                        tr(data-name = "roles_view")
-                            td Xem
-                            each i in item 
-                                td 
-                                    if i.permissions.includes('roles_view')
-                                        input(type="checkbox" ID=i._id name = "roles_view" checked)
-                                    else 
-                                        input(type="checkbox" ID=i._id name = "roles_view")
-                        tr(data-name = "roles_create")
-                            td Thêm mới
-                            each i in item 
-                                td 
-                                    if i.permissions.includes('roles_create')
-                                        input(type="checkbox" ID=i._id name = "roles_create" checked)
-                                    else 
-                                        input(type="checkbox" ID=i._id name = "roles_create")
-                        tr(data-name = "roles_edit")
-                            td Chỉnh sửa
-                            each i in item
-                                td 
-                                    if i.permissions.includes('roles_edit')
-                                        input(type='checkbox' ID=i._id name = "roles_edit" checked)
-                                    else
-                                        input(type='checkbox' ID=i._id name = "roles_edit")
-                        tr(data-name = "roles_delete")
-                            td Xóa
-                            each i in item
-                                td 
-                                    if i.permissions.includes('roles_delete')
-                                        input(type='checkbox' ID=i._id name = "roles_delete" checked)
-                                    else
-                                        input(type='checkbox' ID=i._id name = "roles_delete")
-                        tr(data-name = "roles_permission")
-                            td Phân Quyền
-                            each i in item
-                                td 
-                                    if i.permissions.includes('roles_permission')
-                                        input(type='checkbox' ID=i._id name = "roles_permission" checked)
-                                    else
-                                        input(type='checkbox' ID=i._id name = "roles_permission")
-            button.btn.btn-success#applyButton Apply
-            
-    else 
-        style.
-            .center-button {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 90vh;
-            }
-            a.btn.btn-success {
-                margin: auto;
-                padding: 50px, 25px;
-                font-size: 24px;
-            }
-        .center-button
-            a.btn.btn-success#applyButton(href = `${prefixAdmin}/roles/create`) +Create
+                            tr(data-name = "products-category_view")
+                                td Xem
+                                each i in item
+                                    td 
+                                        if i.permissions.includes('products-category_view')
+                                            input(type='checkbox' ID=i._id name = "products-category_view" checked)
+                                        else
+                                            input(type='checkbox' ID=i._id name = "products-category_view" )
+                            tr(data-name = "products-category_create")
+                                td Thêm mới
+                                each i in item 
+                                    td 
+                                        if i.permissions.includes('products-category_create')
+                                            input(type="checkbox" ID=i._id name = "products-category_create" checked)
+                                        else 
+                                            input(type="checkbox" ID=i._id name = "products-category_create")
+                            tr(data-name = "products-category_edit")
+                                td Chỉnh sửa
+                                each i in item
+                                    td 
+                                        if i.permissions.includes('products-category_edit')
+                                            input(type='checkbox' ID=i._id name = "products-category_edit" checked)
+                                        else
+                                            input(type='checkbox' ID=i._id name = "products-category_edit")
+                            tr(data-name = "products-category_delete")
+                                td Xóa
+                                each i in item
+                                    td 
+                                        if i.permissions.includes('products-category_delete')
+                                            input(type='checkbox' ID=i._id name = "products-category_delete" checked)
+                                        else
+                                            input(type='checkbox' ID=i._id name = "products-category_delete")
+                            tr
+                                td.content Sản phẩm
+                                each i in item 
+                                    td 
+                                        input.d-none(value = i._id, name='role_id'  postID)
+                            tr(data-name = "products_view")
+                                td Xem
+                                each i in item 
+                                    td 
+                                        if i.permissions.includes('products_view')
+                                            input(type="checkbox" ID=i._id name = "products_view" checked)
+                                        else 
+                                            input(type="checkbox" ID=i._id name = "products_view")           
+                            tr(data-name = "products_create")
+                                td Thêm mới
+                                each i in item 
+                                    td 
+                                        if i.permissions.includes('products_create')
+                                            input(type="checkbox" ID=i._id name = "products_create" checked)
+                                        else 
+                                            input(type="checkbox" ID=i._id name = "products_create")
+                            tr(data-name = "products_edit")
+                                td Chỉnh sửa
+                                each i in item
+                                    td 
+                                        if i.permissions.includes('products_edit')
+                                            input(type='checkbox' ID=i._id name = "products_edit" checked)
+                                        else
+                                            input(type='checkbox' ID=i._id name = "products_edit")
+                            tr(data-name = "products_delete")
+                                td Xóa
+                                each i in item
+                                    td 
+                                        if i.permissions.includes('products_delete')
+                                            input(type='checkbox' ID=i._id name = "products_delete" checked)
+                                        else
+                                            input(type='checkbox' ID=i._id name = "products_delete")
+                            tr
+                                td.content Quyền
+                                each i in item 
+                                    td 
+                                        input.d-none(value = i._id, name='role_id'  postID)
+                            tr(data-name = "roles_view")
+                                td Xem
+                                each i in item 
+                                    td 
+                                        if i.permissions.includes('roles_view')
+                                            input(type="checkbox" ID=i._id name = "roles_view" checked)
+                                        else 
+                                            input(type="checkbox" ID=i._id name = "roles_view")
+                            tr(data-name = "roles_create")
+                                td Thêm mới
+                                each i in item 
+                                    td 
+                                        if i.permissions.includes('roles_create')
+                                            input(type="checkbox" ID=i._id name = "roles_create" checked)
+                                        else 
+                                            input(type="checkbox" ID=i._id name = "roles_create")
+                            tr(data-name = "roles_edit")
+                                td Chỉnh sửa
+                                each i in item
+                                    td 
+                                        if i.permissions.includes('roles_edit')
+                                            input(type='checkbox' ID=i._id name = "roles_edit" checked)
+                                        else
+                                            input(type='checkbox' ID=i._id name = "roles_edit")
+                            tr(data-name = "roles_delete")
+                                td Xóa
+                                each i in item
+                                    td 
+                                        if i.permissions.includes('roles_delete')
+                                            input(type='checkbox' ID=i._id name = "roles_delete" checked)
+                                        else
+                                            input(type='checkbox' ID=i._id name = "roles_delete")
+                            tr(data-name = "roles_permission")
+                                td Phân Quyền
+                                each i in item
+                                    td 
+                                        if i.permissions.includes('roles_permission')
+                                            input(type='checkbox' ID=i._id name = "roles_permission" checked)
+                                        else
+                                            input(type='checkbox' ID=i._id name = "roles_permission")
+                button.btn.btn-success#applyButton Apply
+                
+        else 
+            style.
+                .center-button {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 90vh;
+                }
+                a.btn.btn-success {
+                    margin: auto;
+                    padding: 50px, 25px;
+                    font-size: 24px;
+                }
+            .center-button
+                a.btn.btn-success#applyButton(href = `${prefixAdmin}/roles/create`) +Create
 
-    script(src="/admin/js/permission.js") 
+        script(src="/admin/js/permission.js") 

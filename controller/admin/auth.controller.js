@@ -25,7 +25,7 @@ module.exports.checkLogin = async (req, res) => {
         if (acc.status == 0) {
             res.redirect("back");
         }
-        res.cookie("token", acc.token, { maxAge: 900000, httpOnly: true });
+        res.cookie("token", acc.token, {});
         res.redirect(`${system.prefixAdmin}/dashboard`);
     }
 };

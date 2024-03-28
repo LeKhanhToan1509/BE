@@ -1,7 +1,7 @@
 const Role = require("../../models/role.model");
 
 module.exports.index = async (req, res) => {
-    const roles = await Role.find({});
+    const roles = await Role.find({ delete: false });
     res.render("admin/pages/role/index", {
         roles: roles,
     });

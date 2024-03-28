@@ -3,8 +3,8 @@ include ../../mixins/filter-status.pug
 
 block main
     script(src="/admin/js/roleCreate.js")
-
-    a.btn.btn-primary.large(href=`${prefixAdmin}/roles/create` style = "margin : 25px") Create
+    if role.permissions.includes("roles_create")
+        a.btn.btn-primary.large(href=`${prefixAdmin}/roles/create` style = "margin : 25px") Create
 
     table.table
         thead
@@ -14,17 +14,19 @@ block main
                 th Description
                 th Permission
                 th Action
-        tbody
-            each role, index in roles
+        titem
+            each item, index in roles
                 tr
                     td= index + 1
-                    td= role.title
-                    td= role.description
-                    td= role.permissions
-                    td
-                        button.text.edit(href="javascript:;", data-id=role.id) Sửa
-                        button.text.delete(href="javascript:;", data-id=role.id) Xóa
+                    td= item.title
+                    td= item.description
+                    td= item.permissions
+                    td.text-center
+                        if role.permissions.includes("roles_edit")
+                            button.text.edit(href="javascript:;", data-id=item.id) Sửa
+                        if role.permissions.includes("roles_delete")
+                            button.text.delete(href="javascript:;", data-id=item.id) Xóa
     form(action = `${prefixAdmin}/roles`, method = "POST" id = "formEdit" style = "display: none;")
-    
     script(src="/admin/js/roleCreate.js") 
     script(src="/admin/js/roleEdit.js")
+    

@@ -12,10 +12,13 @@ const accountSchema = new mongoose.Schema({
         default: gen.generateString(6),
     },
     image: String,
-    role_id: String,
+    role_id: {
+        type: String,
+        default: "660232e4365d4059a9487241",
+    },
     status: Number,
     delete: { type: Boolean, default: false },
 });
 
-const account = mongoose.model("products", accountSchema, "accounts");
+const account = mongoose.model("Account", accountSchema, "accounts");
 module.exports = account;

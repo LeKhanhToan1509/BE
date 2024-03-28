@@ -2,25 +2,31 @@ extends ../../layouts/default.pug
 include ../../mixins/filter-status.pug
 
 block main
-    table.table
-        thead
-            tr
-                th STT
-                th Avatar
-                th Tên
-                th Trạng thái
-                th Hành động
-        tbody
-            each item, index in items
+    if role.permissions.includes("products-category_view")
+        table.table
+            thead
                 tr
-                    td= index + 1
-                    td
-                        img(src=item.image, alt=item.name)
-                    td= item.name
-                    td= item.status
-                    td
-                        a.btn.btn-primary(data-id = item._id data-status='edit') Sửa
-                        a.btn.btn-danger(data-id = item._id data-status='delete') Xóa
-    a.btn.btn-success(href = `${prefixAdmin}/account/create`) Create
-    form(method = "POST" action = `${prefixAdmin}/account` id = "statusForm")
-    script(src="/admin/js/account.js") 
+                    th STT
+                    th Avatar
+                    th Tên
+                    th Trạng thái
+                    th Hành động
+            tbody
+                each item, index in items
+                    tr
+                        td= index + 1
+                        td
+                            img(src=item.image, alt=item.name)
+                        td= item.name
+                        td= item.status
+                        td
+                            if role.permissions.includes("products-category_edit")
+                                a.btn.btn-primary(data-id = item._id data-status='edit') Sửa
+                            if role.permissions.includes("products-category_delete")
+                                a.btn.btn-danger(data-id = item._id data-status='delete') Xóa
+        if role.permissions.includes("products-category_create")
+            a.btn.btn-success(href = `${prefixAdmin}/account/create`) Create
+        form(method = "POST" action = `${prefixAdmin}/account` id = "statusForm")
+        script(src="/admin/js/account.js") 
+    else 
+        h1 Bạn không có quyền xem nội dung này
