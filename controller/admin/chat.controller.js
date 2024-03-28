@@ -52,5 +52,4 @@ function handleSendTyping(socket, user_id, fullname, type) {
         userID: user_id,
         type,
     });
-    console.log(type);
 }

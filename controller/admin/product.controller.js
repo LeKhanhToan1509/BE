@@ -45,49 +45,74 @@ module.exports.product = async (req, res) => {
 };
 
 module.exports.changeStatus = async (req, res) => {
-    const dataStatus = req.params.status;
-    const status = dataStatus === "active" ? 1 : 0;
-    const id = req.params.id;
-    await Product.updateOne({ _id: id }, { status: status });
-    res.redirect("back");
+    try {
+        const dataStatus = req.params.status;
+        const status = dataStatus === "active" ? 1 : 0;
+        const id = req.params.id;
+        await Product.updateOne({ _id: id }, { status: status });
+        res.redirect("back");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
 };
 
 module.exports.multiChangeStatus = async (req, res) => {
-    const ids = req.body.input.split(",");
-    await Product.updateMany(
-        { _id: { $in: ids } },
-        { $set: { status: req.body.status } }
-    );
-    res.redirect("back");
+    try {
+        const ids = req.body.input.split(",");
+        await Product.updateMany(
+            { _id: { $in: ids } },
+            { $set: { status: req.body.status } }
+        );
+        res.redirect("back");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
 };
 
 module.exports.deleteProduct = async (req, res) => {
-    const id = req.params.id;
-    await Product.updateOne({ _id: id }, { delete: true });
-    res.redirect("back");
+    try {
+        const id = req.params.id;
+        await Product.updateOne({ _id: id }, { delete: true });
+        res.redirect("back");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
 };
 
 module.exports.create = async (req, res) => {
-    res.render("admin/pages/product/create.pug");
+    try {
+        res.render("admin/pages/product/create.pug");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
 };
 
 module.exports.createProduct = async (req, res) => {
-    let title = req.body.title;
-    let description = req.body.description;
-    let discount = req.body.discount;
-    let thumb = req.body.image;
-    let price = req.body.price;
-    let status = req.body.status;
-    console.log(req.body);
-    console.log(thumb);
-    const product = new Product({
-        title: title,
-        description: description,
-        discount: discount,
-        thumbnail: thumb,
-        price: price,
-        status: status,
-    });
-    await Product.insertMany([product]);
-    res.redirect("back");
+    try {
+        let title = req.body.title;
+        let description = req.body.description;
+        let discount = req.body.discount;
+        let thumb = req.body.image;
+        let price = req.body.price;
+        let status = req.body.status;
+        console.log(req.body);
+        console.log(thumb);
+        const product = new Product({
+            title: title,
+            description: description,
+            discount: discount,
+            thumbnail: thumb,
+            price: price,
+            status: status,
+        });
+        await Product.insertMany([product]);
+        res.redirect("back");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
 };
